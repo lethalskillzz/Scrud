@@ -1,23 +1,68 @@
 {
-  "name": "scrud",
-  "version": "1.0.0",
-  "description": "A simple school app",
-  "main": "Server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lethalskillzz/Scrud.git"
-  },
-  "keywords": [
-    "ReactJS",
-    "MERN"
-  ],
-  "author": "Ibrahim Abdulkadir",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lethalskillzz/Scrud/issues"
-  },
-  "homepage": "https://github.com/lethalskillzz/Scrud#readme"
+    "name": "scrud",
+    "version": "1.0.0",
+    "description": "A simple school app",
+    "main": "Server.js",
+
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lethalskillzz/Scrud.git"
+    },
+    "keywords": [
+        "ReactJS",
+        "MERN"
+    ],
+    "author": "Ibrahim Abdulkadir",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/lethalskillzz/Scrud/issues"
+    },
+    "homepage": "https://github.com/lethalskillzz/Scrud#readme",
+
+    "scripts": {
+        "start": "webpack-dev-server --config webpack-dev-server.config.js --progress --inline --colors",
+        "build": "webpack --config webpack-production.config.js --progress --colors",
+        "start-prod": "NODE_ENV=production node src/server/Server.js --progress --colors --profile",
+        "heroku-postbuild": "webpack -p --config ./webpack.production.config.js --progress",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+
+    "devDependencies": {
+        "babel-core": "^6.18.2",
+        "babel-loader": "^7.0.0",
+        "babel-preset-env": "^1.5.2",
+        "babel-preset-es2015": "^6.18.0",
+        "babel-preset-react": "^6.16.0",
+        "babel-preset-stage-2": "^6.18.0",
+        "css-loader": "^0.28.4",
+        "file-loader": "^0.11.2",
+        "html-webpack-plugin": "^2.24.1",
+        "nodemon": "^1.11.0",
+        "style-loader": "^0.18.2",
+        "transfer-webpack-plugin": "^0.1.4",
+        "url-loader": "^0.5.9",
+        "webpack": "^2.4.1",
+        "webpack-dev-server": "^2.4.2",
+        "webpack-node-externals": "^1.6.0"
+    },
+    "dependencies": {
+        "axios": "^0.16.2",
+        "bootstrap": "^3.3.7",
+        "classnames": "^2.2.5",
+        "express": "^4.15.3",
+        "js-sha512": "^0.5.0",
+        "material-ui": "latest",
+        "mongoose": "^4.10.6",
+        "react": "^15.4.2",
+        "react-bootstrap": "^0.31.0",
+        "react-dom": "^15.4.2",
+        "react-redux": "^5.0.6",
+        "react-router": "^4.1.1",
+        "react-tap-event-plugin": "^2.0.1",
+        "redux": "^3.7.2"
+    },
+    "engines": {
+        "node": "7.7.4",
+        "npm": "4.1.2"
+    }
 }
