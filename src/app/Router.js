@@ -2,12 +2,6 @@ import React from 'react';
 import {Router, browserHistory, Route} from 'react-router';
 import { createBrowserHistory } from 'history';
 
-import Main from './Main';
-import Verify from './Verify';
-import Success from './Success';
-import Pending from './Pending';
-import Failed from './Failed';
-
 
 const AppRouter = () => {
   return (
