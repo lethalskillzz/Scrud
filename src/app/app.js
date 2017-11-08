@@ -5,8 +5,6 @@ import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
 import AppRouter from './Router';
 
-//import Main from './Main'; 
-
 
 // Needed for onTouchTap
 injectTapEventPlugin();

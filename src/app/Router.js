@@ -2,6 +2,7 @@ import React from 'react';
 import {Router, browserHistory, Route} from 'react-router';
 import { createBrowserHistory } from 'history';
 
+import Main from './Main';
 
 const AppRouter = () => {
   return (

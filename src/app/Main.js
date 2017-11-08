@@ -3,46 +3,133 @@ import { blue50, green800 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import classNames from 'classnames';
-import { connect } from 'react-redux'
+import { GridList } from 'material-ui/GridList';
+import Subheader from 'material-ui/Subheader';
 
-import Verify from './Verify';
-
-
+import Card from './Card'; 
+import FAB from './FAB';
+ 
 const styles = {
 
-  container: {
-  },
+    container: {
+        display: '-webkit-flex',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FAFAFA',
+        minHeight: '100vh'
+    },
 
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+    },
+    gridList: {
+        width: 1000,
+        height: 750,
+        overflowY: 'auto',
+    },
 };
 
 const muiTheme = getMuiTheme({
-  palette: {
-    primary1Color: green800,
-    accent1Color: blue50,
-  },
+    palette: {
+        primary1Color: green800,
+        accent1Color: blue50,
+    },
 });
+
+
+const tilesData = [
+    {
+        id: '1',
+        title: 'Breakfast',
+        author: 'jill111',
+    },
+    {
+        id: '2',
+        title: 'Tasty burger',
+        author: 'pashminu',
+    },
+    {
+        id: '3',
+        title: 'Camera',
+        author: 'Danson67',
+    },
+    {
+        id: '4',
+        title: 'Morning',
+        author: 'fancycrave1',
+    },
+    {
+        id: '5',
+        title: 'Camera',
+        author: 'Danson67',
+    },
+    {
+        id: '6',
+        title: 'Morning',
+        author: 'fancycrave1',
+    },
+    {
+        id: '7',
+        title: 'Camera',
+        author: 'Danson67',
+    },
+    {
+        id: '8',
+        title: 'Morning',
+        author: 'fancycrave1',
+    },
+    {
+        id: '9',
+        title: 'Camera',
+        author: 'Danson67',
+    },
+    {
+        id: '10',
+        title: 'Morning',
+        author: 'fancycrave1',
+    }
+];
+
 
 class Main extends Component {
 
-  render() {
+    render() {
 
-    return (
+        return (
 
-      <MuiThemeProvider muiTheme={muiTheme}>
+            <MuiThemeProvider muiTheme={muiTheme}>
 
-        <div>
+                <div className='col-md-12' style={styles.container} >
 
-          <div className='row' style={styles.container}>
+                    <div className='row' style={styles.container}>
 
-            <Verify/>
-            
-          </div>
+                        <div style={styles.root}>
+                            <GridList
+                                cellHeight={'auto'}
+                                cols={3}
+                                style={styles.gridList}>
+                                <Subheader>Student</Subheader>
+                                {tilesData.map((tile) => (
 
-        </div>
+                                    <Card key={tile.id}/>
+                                   
+                                ))}
+                            </GridList>
+                        </div>
 
-      </MuiThemeProvider>
-    );
-  }
+                        
+                    </div>
+
+                    <FAB/>
+                          
+                </div>
+
+            </MuiThemeProvider>
+        );
+    }
 }
 
 export default Main;
