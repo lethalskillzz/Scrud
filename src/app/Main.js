@@ -6,9 +6,11 @@ import classNames from 'classnames';
 import { GridList } from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 
-import Card from './Card'; 
+import AppBar from 'material-ui/AppBar';
+
+import Card from './Card';
 import FAB from './FAB';
- 
+
 const styles = {
 
     container: {
@@ -20,14 +22,9 @@ const styles = {
         minHeight: '100vh'
     },
 
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-    },
+    
     gridList: {
-        width: 1000,
-        height: 750,
+        justifyContent: 'center',
         overflowY: 'auto',
     },
 };
@@ -102,29 +99,24 @@ class Main extends Component {
 
             <MuiThemeProvider muiTheme={muiTheme}>
 
-                <div className='col-md-12' style={styles.container} >
+                <div>
+                    <AppBar
+                        title="Title"
+                        iconClassNameRight="muidocs-icon-navigation-expand-more"
+                    />
+                    <div className='col-md-12' style={styles.container} >
+                        <GridList
+                            cellHeight={'auto'}
+                            cols={4}
+                            style={styles.gridList}>
 
-                    <div className='row' style={styles.container}>
-
-                        <div style={styles.root}>
-                            <GridList
-                                cellHeight={'auto'}
-                                cols={3}
-                                style={styles.gridList}>
-                                <Subheader>Student</Subheader>
-                                {tilesData.map((tile) => (
-
-                                    <Card key={tile.id}/>
-                                   
-                                ))}
-                            </GridList>
-                        </div>
-
-                        
+                            <Subheader>Student</Subheader>
+                            {tilesData.map((tile) => (
+                                <Card key={tile.id} />
+                            ))}
+                        </GridList>
                     </div>
-
-                    <FAB/>
-                          
+                    <FAB />
                 </div>
 
             </MuiThemeProvider>
