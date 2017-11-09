@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import { green800 } from 'material-ui/styles/colors';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
- 
+const styles = {
+    underlineStyle: {
+        borderColor: green800,
+    },
+
+    floatingLabelFocusStyle: {
+        color: green800,
+    },
+
+    textField: {
+        width: '100%',
+    },
+
+    customWidth: {
+        width: '100%',
+    },
+}
+
 export default class Modal extends Component {
 
     constructor(props, context) {
@@ -13,9 +33,8 @@ export default class Modal extends Component {
 
         this.state = {
             open: this.props.open,
+            value: 1,
         };
-        
-    
     }
 
     handleClose = () => {
@@ -48,13 +67,50 @@ export default class Modal extends Component {
         return (
             <div>
                 <Dialog
-                    title="Dialog With Actions"
+                    title="Add New"
                     actions={actions}
                     modal={true}
                     open={this.state.open}
                 >
-                    Only actions can close this dialog.
-        </Dialog>
+                    <TextField style={styles.textField}
+                        floatingLabelText="Firstname"
+                        underlineFocusStyle={styles.underlineStyle}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        ref="firstnameField"
+                    />
+
+                    <TextField style={styles.textField}
+                        floatingLabelText="Lastname"
+                        underlineFocusStyle={styles.underlineStyle}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        ref="lastnameField"
+                    />
+
+                    <SelectField
+                        floatingLabelText="Sex"
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        style={styles.customWidth}
+                    >
+                        <MenuItem value={1} primaryText="Male" />
+                        <MenuItem value={2} primaryText="Female" />
+                       
+                    </SelectField>
+
+                    <TextField style={styles.textField}
+                        floatingLabelText="Registration Number"
+                        underlineFocusStyle={styles.underlineStyle}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        ref="regnoField"
+                    />
+                    
+                    <TextField style={styles.textField}
+                        floatingLabelText="Class"
+                        underlineFocusStyle={styles.underlineStyle}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        ref="classField"
+                    />
+                </Dialog>
             </div>
         );
     }
