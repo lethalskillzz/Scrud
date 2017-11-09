@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
-/**
- * A modal dialog can only be closed by selecting one of the actions.
- */
-export default class Modal extends React.Component {
+ 
+export default class Modal extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -14,8 +12,10 @@ export default class Modal extends React.Component {
         this.handleSubmitButton = this.handleSubmitButton.bind(this);
 
         this.state = {
-            open: true,
+            open: this.props.open,
         };
+        
+    
     }
 
     handleClose = () => {

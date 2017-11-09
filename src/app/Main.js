@@ -9,8 +9,7 @@ import Subheader from 'material-ui/Subheader';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-
-import Card from './Card';
+import CardItem from './CardItem';
 import Modal from './Modal';
 
 const styles = {
@@ -124,7 +123,7 @@ const tilesData = [
 ];
 
 
-class Main extends Component {
+export default class Main extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -151,8 +150,15 @@ class Main extends Component {
     }
 
     handleSubmit(textInputValue) {
-
+        this.setState({
+            modal: {
+                show: false,
+            }, function () {
+            }
+        });
+    
     }
+    
     handleEdit(textInputValue) {
 
     }
@@ -193,7 +199,10 @@ class Main extends Component {
                             style={styles.gridList}>
                             <Subheader>Student</Subheader>
                             {tilesData.map((tile) => (
-                                <Card key={tile.id} />
+                                <CardItem key={tile.id} 
+                                _id={tile._id} regno={tile.regno}
+                                 name={tile.name} dob={tile.dob}
+                                 sex={tile.sex} class={tile.class}/>
                             ))}
 
                         </GridList>
@@ -202,7 +211,7 @@ class Main extends Component {
                         </FloatingActionButton>
                     </div>
 
-                    {this.state.modal.show ? <Modal handleSubmitButton={this.handleSubmit} /> : ''}
+                    {this.state.modal.show ? <Modal open={true} handleSubmitButton={this.handleSubmit} /> : ''}
 
                 </div>
 
@@ -210,5 +219,3 @@ class Main extends Component {
         );
     }
 }
-
-export default Main;
