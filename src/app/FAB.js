@@ -4,7 +4,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 
 const style = {
   marginRight: 20,
-};
+ };
 
 
 const FAB = () => (

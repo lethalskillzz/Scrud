@@ -22,9 +22,10 @@ const styles = {
         minHeight: '100vh'
     },
 
-    
+
     gridList: {
-        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
         overflowY: 'auto',
     },
 };
@@ -40,53 +41,83 @@ const muiTheme = getMuiTheme({
 const tilesData = [
     {
         id: '1',
-        title: 'Breakfast',
-        author: 'jill111',
+        regno: 'REG38576885',
+        name: 'Safiya Ibrahim',
+        dob: '12/4/1999',
+        sex: 'Female',
+        class: 'class#'
     },
     {
         id: '2',
-        title: 'Tasty burger',
-        author: 'pashminu',
+        regno: 'REG48576884',
+        name: 'Bola Aina',
+        dob: '12/4/1999',
+        sex: 'Female',
+        class: 'class#'
     },
     {
         id: '3',
-        title: 'Camera',
-        author: 'Danson67',
+        regno: 'REG68576884',
+        name: 'Yusuf Saliu',
+        dob: '12/4/1999',
+        sex: 'Male',
+        class: 'class#'
     },
     {
         id: '4',
-        title: 'Morning',
-        author: 'fancycrave1',
+        regno: 'REG18576882',
+        name: 'Keneth Idoh',
+        dob: '12/4/1999',
+        sex: 'Male',
+        class: 'class#'
     },
     {
         id: '5',
-        title: 'Camera',
-        author: 'Danson67',
+        regno: 'REG28576889',
+        name: 'Julie Eze',
+        dob: '12/4/1999',
+        sex: 'Female',
+        class: 'class#'
     },
     {
         id: '6',
-        title: 'Morning',
-        author: 'fancycrave1',
+        regno: 'REG88576885',
+        name: 'Olu Makinde',
+        dob: '12/4/1999',
+        sex: 'Male',
+        class: 'class#'
     },
     {
         id: '7',
-        title: 'Camera',
-        author: 'Danson67',
+        regno: 'REG67576888',
+        name: 'Samuel Osita',
+        dob: '12/4/1999',
+        sex: 'Male',
+        class: 'class#'
     },
     {
         id: '8',
-        title: 'Morning',
-        author: 'fancycrave1',
+        regno: 'REG10576880',
+        name: 'Jacob Zuma',
+        dob: '12/4/1999',
+        sex: 'Male',
+        class: 'class#'
     },
     {
         id: '9',
-        title: 'Camera',
-        author: 'Danson67',
+        regno: 'REG25576885',
+        name: 'Audu Aliu',
+        dob: '12/4/1999',
+        sex: 'Male',
+        class: 'class#'
     },
     {
         id: '10',
-        title: 'Morning',
-        author: 'fancycrave1',
+        regno: 'REG66576889',
+        name: 'Musa Bature',
+        dob: '12/4/1999',
+        sex: 'Male',
+        class: 'class#'
     }
 ];
 
@@ -101,15 +132,17 @@ class Main extends Component {
 
                 <div>
                     <AppBar
-                        title="Title"
-                        iconClassNameRight="muidocs-icon-navigation-expand-more"
+                        title="SCRUD"
+                        ClassNameRight="miconuidocs-icon-navigation-expand-more"
                     />
+                    
+                    
                     <div className='col-md-12' style={styles.container} >
+                    
                         <GridList
                             cellHeight={'auto'}
                             cols={4}
                             style={styles.gridList}>
-
                             <Subheader>Student</Subheader>
                             {tilesData.map((tile) => (
                                 <Card key={tile.id} />
