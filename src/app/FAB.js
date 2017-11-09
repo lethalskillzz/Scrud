@@ -8,11 +8,9 @@ const style = {
 
 
 const FAB = () => (
-  <div>
-    <FloatingActionButton style={style}>
+     <FloatingActionButton style={style}>
       <ContentAdd />
     </FloatingActionButton>
-  </div>
-);
+ );
 
 export default FAB;

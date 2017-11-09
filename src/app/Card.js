@@ -8,14 +8,16 @@ const CardExampleWithAvatar = () => (
      
     <CardTitle title="Card title" subtitle="Card subtitle" />
     <CardText>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      
+    
+    XXXXXX
+    XXXXXXXXX 
+    XXXXXX
     </CardText>
     
     
     <CardActions>
-      <FlatButton label="Action1" />
-      <FlatButton label="Action2" />
+      <FlatButton label="Edit" />
+      <FlatButton label="Delete" />
     </CardActions>
   </Card>
 );

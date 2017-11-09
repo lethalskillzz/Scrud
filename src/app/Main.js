@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { blue50, green800 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
 import classNames from 'classnames';
 import { GridList } from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
-import AppBar from 'material-ui/AppBar';
 
 import Card from './Card';
-import FAB from './FAB';
+import Modal from './Modal';
 
 const styles = {
 
@@ -124,6 +126,52 @@ const tilesData = [
 
 class Main extends Component {
 
+    constructor(props, context) {
+        super(props, context);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+
+        this.state = {
+            modal: {
+                show: false,
+            },
+            response: {
+                _id: '',
+                regno: '',
+                name: '',
+                dob: '',
+                sex: '',
+                class: ''
+            },
+            _id: '',
+            url: 'http://www.remitademo.net/remita/ecomm/',
+        };
+    }
+
+    handleSubmit(textInputValue) {
+
+    }
+    handleEdit(textInputValue) {
+
+    }
+    handleDelete(textInputValue) {
+
+    }
+
+    handleAddClick = () => {
+
+        this.setState({
+            modal: {
+                show: true,
+            },
+        }, function () {
+
+        });
+    }
+
+
     render() {
 
         return (
@@ -135,10 +183,10 @@ class Main extends Component {
                         title="SCRUD"
                         ClassNameRight="miconuidocs-icon-navigation-expand-more"
                     />
-                    
-                    
+
+
                     <div className='col-md-12' style={styles.container} >
-                    
+
                         <GridList
                             cellHeight={'auto'}
                             cols={4}
@@ -147,9 +195,15 @@ class Main extends Component {
                             {tilesData.map((tile) => (
                                 <Card key={tile.id} />
                             ))}
+
                         </GridList>
+                        <FloatingActionButton onClick={this.handleAddClick}>
+                            <ContentAdd />
+                        </FloatingActionButton>
                     </div>
-                    <FAB />
+
+                    {this.state.modal.show ? <Modal handleSubmitButton={this.handleSubmit} /> : ''}
+
                 </div>
 
             </MuiThemeProvider>

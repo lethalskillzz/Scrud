@@ -8,7 +8,7 @@ import Alert from './Alert';
 const AppRouter = () => {
   return (
     <Router history={createBrowserHistory()}>
-      <Route path="/" component={Alert} 
+      <Route path="/" component={Main} 
          >
        </Route> 
     </Router>
