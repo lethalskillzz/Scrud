@@ -37,6 +37,10 @@ export default class Modal extends Component {
         };
     }
 
+    handleChange = () => {
+        this.setState({ value: this.state.value===1? 2:1 });
+    };
+    
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -44,7 +48,12 @@ export default class Modal extends Component {
     handleSubmitButton(event) {
         event.preventDefault();
 
-        const textInputValue = 'xxxxxx';
+        const firstnameValue = this.refs.firstnameField.getValue();
+        const lastnameValue = this.refs.lastnameField.getValue();
+        const regnoValue = this.refs.regnoField.getValue();
+        const classValue = this.refs.classField.getValue();
+        const genderValue = this.state.value===1? 'Male':'Female';
+        
         this.props.handleSubmitButton(textInputValue);
         this.setState({ open: false });
     }
