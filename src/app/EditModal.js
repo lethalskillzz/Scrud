@@ -5,6 +5,7 @@ import TextField from 'material-ui/TextField';
 import { green800 } from 'material-ui/styles/colors';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import DatePicker from 'material-ui/DatePicker';
 
 const styles = {
     underlineStyle: {
@@ -15,16 +16,12 @@ const styles = {
         color: green800,
     },
 
-    textField: {
-        width: '100%',
-    },
-
     customWidth: {
         width: '100%',
     },
 }
 
-export default class Modal extends Component {
+export default class EditModal extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -81,14 +78,14 @@ export default class Modal extends Component {
                     modal={true}
                     open={this.state.open}
                 >
-                    <TextField style={styles.textField}
+                    <TextField style={styles.customWidth}
                         floatingLabelText="Firstname"
                         underlineFocusStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                         ref="firstnameField"
                     />
 
-                    <TextField style={styles.textField}
+                    <TextField style={styles.customWidth}
                         floatingLabelText="Lastname"
                         underlineFocusStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
@@ -105,15 +102,17 @@ export default class Modal extends Component {
                         <MenuItem value={2} primaryText="Female" />
                        
                     </SelectField>
+                    
+                    <DatePicker textFieldStyle={styles.customWidth} hintText="Date Of Birth"/>
 
-                    <TextField style={styles.textField}
+                    <TextField style={styles.customWidth}
                         floatingLabelText="Registration Number"
                         underlineFocusStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                         ref="regnoField"
                     />
                     
-                    <TextField style={styles.textField}
+                    <TextField style={styles.customWidth}
                         floatingLabelText="Class"
                         underlineFocusStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}

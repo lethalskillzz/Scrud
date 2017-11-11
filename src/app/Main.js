@@ -10,7 +10,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import CardItem from './CardItem';
-import Modal from './Modal';
+import NewModal from './NewModal';
 
 const styles = {
 
@@ -41,7 +41,7 @@ const muiTheme = getMuiTheme({
 
 const tilesData = [
     {
-        id: '1',
+        _id: '1',
         regno: 'REG38576885',
         name: 'Safiya Ibrahim',
         dob: '12/4/1999',
@@ -49,7 +49,7 @@ const tilesData = [
         class: 'class#'
     },
     {
-        id: '2',
+        _id: '2',
         regno: 'REG48576884',
         name: 'Bola Aina',
         dob: '12/4/1999',
@@ -57,7 +57,7 @@ const tilesData = [
         class: 'class#'
     },
     {
-        id: '3',
+        _id: '3',
         regno: 'REG68576884',
         name: 'Yusuf Saliu',
         dob: '12/4/1999',
@@ -65,7 +65,7 @@ const tilesData = [
         class: 'class#'
     },
     {
-        id: '4',
+        _id: '4',
         regno: 'REG18576882',
         name: 'Keneth Idoh',
         dob: '12/4/1999',
@@ -73,7 +73,7 @@ const tilesData = [
         class: 'class#'
     },
     {
-        id: '5',
+        _id: '5',
         regno: 'REG28576889',
         name: 'Julie Eze',
         dob: '12/4/1999',
@@ -81,7 +81,7 @@ const tilesData = [
         class: 'class#'
     },
     {
-        id: '6',
+        _id: '6',
         regno: 'REG88576885',
         name: 'Olu Makinde',
         dob: '12/4/1999',
@@ -89,7 +89,7 @@ const tilesData = [
         class: 'class#'
     },
     {
-        id: '7',
+        _id: '7',
         regno: 'REG67576888',
         name: 'Samuel Osita',
         dob: '12/4/1999',
@@ -97,7 +97,7 @@ const tilesData = [
         class: 'class#'
     },
     {
-        id: '8',
+        _id: '8',
         regno: 'REG10576880',
         name: 'Jacob Zuma',
         dob: '12/4/1999',
@@ -105,7 +105,7 @@ const tilesData = [
         class: 'class#'
     },
     {
-        id: '9',
+        _id: '9',
         regno: 'REG25576885',
         name: 'Audu Aliu',
         dob: '12/4/1999',
@@ -113,7 +113,7 @@ const tilesData = [
         class: 'class#'
     },
     {
-        id: '10',
+        _id: '10',
         regno: 'REG66576889',
         name: 'Musa Bature',
         dob: '12/4/1999',
@@ -139,12 +139,13 @@ export default class Main extends Component {
             response: {
                 _id: '',
                 regno: '',
-                name: '',
+                firstname: '',
+                lastname: '',
                 dob: '',
                 sex: '',
                 class: ''
             },
-            _id: '',
+            regno: '',
             url: 'http://www.remitademo.net/remita/ecomm/',
         };
     }
@@ -199,7 +200,7 @@ export default class Main extends Component {
                             style={styles.gridList}>
                             <Subheader>Student</Subheader>
                             {tilesData.map((tile) => (
-                                <CardItem key={tile.id} 
+                                <CardItem key={tile._id} 
                                 _id={tile._id} regno={tile.regno}
                                  name={tile.name} dob={tile.dob}
                                  sex={tile.sex} class={tile.class}/>
@@ -211,7 +212,7 @@ export default class Main extends Component {
                         </FloatingActionButton>
                     </div>
 
-                    {this.state.modal.show ? <Modal open={true} handleSubmitButton={this.handleSubmit} /> : ''}
+                    {this.state.modal.show ? <NewModal open={true} handleSubmitButton={this.handleSubmit} /> : ''}
 
                 </div>
 
@@ -219,3 +220,4 @@ export default class Main extends Component {
         );
     }
 }
+

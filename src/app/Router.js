@@ -1,16 +1,18 @@
 import React from 'react';
-import {Router, browserHistory, Route} from 'react-router';
+import {Router, browserHistory, Switch, Route} from 'react-router';
+ 
 import { createBrowserHistory } from 'history';
 
 import Main from './Main';
-import Alert from './Alert';
+import Refresh from './Refresh';
 
 const AppRouter = () => {
   return (
     <Router history={createBrowserHistory()}>
-      <Route path="/" component={Main} 
-         >
-       </Route> 
+    <Switch>
+      <Route path="/" component={Main} />
+      <Route path="/Refresh" component={Refresh} />
+      </Switch>
     </Router>
   );
 };
