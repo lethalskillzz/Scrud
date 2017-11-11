@@ -30,14 +30,21 @@ export default class EditModal extends Component {
 
         this.state = {
             open: this.props.open,
-            value: 1,
+            value: this.props.sex==='Male'? 1:2,
+            _id: this.props._id,
+            regno: this.props.regno,
+            firstname: this.props.firstname,
+            lastname: this.props.lastname,
+            dob: this.props.dob,
+            sex: this.props.sex,
+            class: this.props.class
         };
     }
 
     handleChange = () => {
-        this.setState({ value: this.state.value===1? 2:1 });
+        this.setState({ value: this.state.value === 1 ? 2 : 1 });
     };
-    
+
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -49,9 +56,18 @@ export default class EditModal extends Component {
         const lastnameValue = this.refs.lastnameField.getValue();
         const regnoValue = this.refs.regnoField.getValue();
         const classValue = this.refs.classField.getValue();
-        const genderValue = this.state.value===1? 'Male':'Female';
-        
-        this.props.handleSubmitButton(textInputValue);
+        const genderValue = this.state.value === 1 ? 'Male' : 'Female';
+
+        const requestValue = 'firstnameValue=' + firstnameValue +
+            'lastnameValue=' + lastnameValue +
+            'firstnameValue=' + firstnameValue +
+            'regnoValue=' + regnoValue +
+            'classValue=' + classValue +
+            'genderValue=' + genderValue;
+
+        console.log(requestValue);
+
+        this.props.handleSubmitButton(requestValue);
         this.setState({ open: false });
     }
 
@@ -73,7 +89,7 @@ export default class EditModal extends Component {
         return (
             <div>
                 <Dialog
-                    title="Add New"
+                    title="Edit"
                     actions={actions}
                     modal={true}
                     open={this.state.open}
@@ -83,6 +99,7 @@ export default class EditModal extends Component {
                         underlineFocusStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                         ref="firstnameField"
+                        defaultValue={this.state.firstname}
                     />
 
                     <TextField style={styles.customWidth}
@@ -90,6 +107,7 @@ export default class EditModal extends Component {
                         underlineFocusStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                         ref="lastnameField"
+                        defaultValue={this.state.lastname}
                     />
 
                     <SelectField
@@ -100,23 +118,27 @@ export default class EditModal extends Component {
                     >
                         <MenuItem value={1} primaryText="Male" />
                         <MenuItem value={2} primaryText="Female" />
-                       
+
                     </SelectField>
-                    
-                    <DatePicker textFieldStyle={styles.customWidth} hintText="Date Of Birth"/>
+
+                    <DatePicker textFieldStyle={styles.customWidth} 
+                    hintText="Date Of Birth" 
+                    defaultDate={new Date(this.state.dob)}/>
 
                     <TextField style={styles.customWidth}
                         floatingLabelText="Registration Number"
                         underlineFocusStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                         ref="regnoField"
+                        defaultValue={this.state.regno}
                     />
-                    
+
                     <TextField style={styles.customWidth}
                         floatingLabelText="Class"
                         underlineFocusStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                         ref="classField"
+                        defaultValue={this.state.class}
                     />
                 </Dialog>
             </div>

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
+
+
 const style = {
     marginLeft: 20,
     fontSize: '16px',
@@ -16,6 +18,14 @@ export default class CardItem extends Component {
 
         };
     }
+    
+    handleEdit = () => {
+        this.setState({ value: this.state.value===1? 2:1 });
+    };
+    
+    handleDelete = () => {
+        this.setState({ value: this.state.value===1? 2:1 });
+    };
 
     render() {
         return (
@@ -28,8 +38,8 @@ export default class CardItem extends Component {
                 </div>
 
                 <CardActions>
-                    <FlatButton label="Edit" />
-                    <FlatButton label="Delete" />
+                    <FlatButton label="Edit" onClick={this.handleEdit}/>
+                    <FlatButton label="Delete" onClick={this.handleDelete}/>
                 </CardActions>
             </Card>
         );

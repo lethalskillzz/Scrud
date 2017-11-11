@@ -51,7 +51,16 @@ export default class NewModal extends Component {
         const classValue = this.refs.classField.getValue();
         const genderValue = this.state.value===1? 'Male':'Female';
         
-        this.props.handleSubmitButton(textInputValue);
+        const requestValue = 'firstnameValue='+firstnameValue+
+        'lastnameValue='+lastnameValue+
+        'firstnameValue='+firstnameValue+
+        'regnoValue='+regnoValue+
+        'classValue='+classValue+
+        'genderValue='+genderValue;
+        
+        console.log(requestValue);
+        
+        this.props.handleSubmitButton(requestValue);
         this.setState({ open: false });
     }
 

@@ -10,7 +10,9 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import CardItem from './CardItem';
-import NewModal from './NewModal';
+import AddModal from './AddModal';
+import EditModal from './EditModal';
+import DeleteModal from './DeleteModal';
 
 const styles = {
 
@@ -136,6 +138,12 @@ export default class Main extends Component {
             modal: {
                 show: false,
             },
+            editmodal: {
+                show: false,
+            },
+            deletemodal: {
+                show: false,
+            },
             response: {
                 _id: '',
                 regno: '',
@@ -150,7 +158,7 @@ export default class Main extends Component {
         };
     }
 
-    handleSubmit(textInputValue) {
+    handleSubmit(submitValue) {
         this.setState({
             modal: {
                 show: false,
@@ -160,17 +168,18 @@ export default class Main extends Component {
     
     }
     
-    handleEdit(textInputValue) {
+    handleEdit(editValue) {
 
     }
-    handleDelete(textInputValue) {
+    
+    handleDelete(deleteValue) {
 
     }
 
     handleAddClick = () => {
 
         this.setState({
-            modal: {
+            newmodal: {
                 show: true,
             },
         }, function () {
