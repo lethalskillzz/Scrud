@@ -45,7 +45,8 @@ const tilesData = [
     {
         _id: '1',
         regno: 'REG38576885',
-        name: 'Safiya Ibrahim',
+        firstname: 'Safiya',
+        lastname: 'Ibrahim',
         dob: '12/4/1999',
         sex: 'Female',
         class: 'class#'
@@ -53,7 +54,8 @@ const tilesData = [
     {
         _id: '2',
         regno: 'REG48576884',
-        name: 'Bola Aina',
+        firstname: 'Bola',
+        lastname: 'Aina',
         dob: '12/4/1999',
         sex: 'Female',
         class: 'class#'
@@ -61,7 +63,8 @@ const tilesData = [
     {
         _id: '3',
         regno: 'REG68576884',
-        name: 'Yusuf Saliu',
+        firstname: 'Yusuf',
+        lastname: 'Saliu',
         dob: '12/4/1999',
         sex: 'Male',
         class: 'class#'
@@ -69,7 +72,8 @@ const tilesData = [
     {
         _id: '4',
         regno: 'REG18576882',
-        name: 'Keneth Idoh',
+        firstname: 'Keneth',
+        lastname: 'Idoh',
         dob: '12/4/1999',
         sex: 'Male',
         class: 'class#'
@@ -77,7 +81,8 @@ const tilesData = [
     {
         _id: '5',
         regno: 'REG28576889',
-        name: 'Julie Eze',
+        firstname: 'Julie',
+        lastname: 'Eze',
         dob: '12/4/1999',
         sex: 'Female',
         class: 'class#'
@@ -85,7 +90,8 @@ const tilesData = [
     {
         _id: '6',
         regno: 'REG88576885',
-        name: 'Olu Makinde',
+        firstname: 'Olu',
+        lastname: 'Makinde',
         dob: '12/4/1999',
         sex: 'Male',
         class: 'class#'
@@ -93,7 +99,8 @@ const tilesData = [
     {
         _id: '7',
         regno: 'REG67576888',
-        name: 'Samuel Osita',
+        firstname: 'Samuel',
+        lastname: 'Osita',
         dob: '12/4/1999',
         sex: 'Male',
         class: 'class#'
@@ -101,7 +108,8 @@ const tilesData = [
     {
         _id: '8',
         regno: 'REG10576880',
-        name: 'Jacob Zuma',
+        firstname: 'Jacob',
+        lastname: 'Zuma',
         dob: '12/4/1999',
         sex: 'Male',
         class: 'class#'
@@ -109,7 +117,8 @@ const tilesData = [
     {
         _id: '9',
         regno: 'REG25576885',
-        name: 'Audu Aliu',
+        firstname: 'Audu',
+        lastname: 'Aliu',
         dob: '12/4/1999',
         sex: 'Male',
         class: 'class#'
@@ -117,7 +126,8 @@ const tilesData = [
     {
         _id: '10',
         regno: 'REG66576889',
-        name: 'Musa Bature',
+        firstname: 'Musa',
+        lastname: 'Bature',
         dob: '12/4/1999',
         sex: 'Male',
         class: 'class#'
@@ -130,12 +140,14 @@ export default class Main extends Component {
     constructor(props, context) {
         super(props, context);
 
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
+        this.handleSubmitEdit = this.handleSubmitEdit.bind(this);
+        this.handleSubmitDelete = this.handleSubmitDelete.bind(this);
+
         this.handleEdit = this.handleEdit.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
 
         this.state = {
-            modal: {
+            addmodal: {
                 show: false,
             },
             editmodal: {
@@ -153,33 +165,74 @@ export default class Main extends Component {
                 sex: '',
                 class: ''
             },
+
+            edit_id: '',
+            editregno: '',
+            editfirstname: '',
+            editlastname: '',
+            editdob: '',
+            editsex: '',
+            editclass: '',
+
             regno: '',
             url: 'http://www.remitademo.net/remita/ecomm/',
         };
     }
 
-    handleSubmit(submitValue) {
+    handleSubmitAdd(submitValue) {
         this.setState({
-            modal: {
+            addmodal: {
                 show: false,
-            }, function () {
+            }, function() {
             }
         });
-    
-    }
-    
-    handleEdit(editValue) {
 
     }
-    
-    handleDelete(deleteValue) {
 
+    handleSubmitEdit(editValue) {
+        this.setState({
+            editmodal: {
+                show: false,
+            }, function() {
+            }
+        });
+    }
+
+
+    handleEdit(edit_id, editregno, editfirstname,
+        editlastname, editdob, editsex, editclass) {
+        this.setState({
+            editmodal: {
+                show: true,
+            },
+
+            edit_id: edit_id,
+            editregno: editregno,
+            editfirstname: editfirstname,
+            editlastname: editlastname,
+            editdob: editdob,
+            editsex: editsex,
+            editclass: editclass,
+
+            function() {
+            }
+        });
+    }
+
+
+    handleSubmitDelete(deleteValue) {
+        this.setState({
+            deletemodal: {
+                show: false,
+            }, function() {
+            }
+        });
     }
 
     handleAddClick = () => {
 
         this.setState({
-            newmodal: {
+            addmodal: {
                 show: true,
             },
         }, function () {
@@ -209,10 +262,11 @@ export default class Main extends Component {
                             style={styles.gridList}>
                             <Subheader>Student</Subheader>
                             {tilesData.map((tile) => (
-                                <CardItem key={tile._id} 
-                                _id={tile._id} regno={tile.regno}
-                                 name={tile.name} dob={tile.dob}
-                                 sex={tile.sex} class={tile.class}/>
+                                <CardItem key={tile._id}
+                                    _id={tile._id} regno={tile.regno}
+                                    firstname={tile.firstname} lastname={tile.lastname}
+                                     dob={tile.dob} sex={tile.sex} class={tile.class}
+                                    handleditButton={this.handleEdit} />
                             ))}
 
                         </GridList>
@@ -221,7 +275,8 @@ export default class Main extends Component {
                         </FloatingActionButton>
                     </div>
 
-                    {this.state.modal.show ? <NewModal open={true} handleSubmitButton={this.handleSubmit} /> : ''}
+                    {this.state.addmodal.show ? <AddModal open={true} handleSubmitButton={this.handleSubmitAdd} /> : ''}
+                    {this.state.edditmodal.show ? <EditModal open={true} handleSubmitButton={this.handleSubmitEdit} /> : ''}
 
                 </div>
 

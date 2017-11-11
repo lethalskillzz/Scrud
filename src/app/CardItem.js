@@ -12,16 +12,34 @@ const style = {
 
 export default class CardItem extends Component {
 
+
     constructor(props, context) {
         super(props, context);
+        
+        this.handleEditButton = this.handleEditButton.bind(this);
+        
         this.state = {
 
         };
     }
     
-    handleEdit = () => {
+    handleEditButton(event) {
+        event.preventDefault();
+
+        {this.props.sex} 
+                    {this.props.dob} 
+                    {this.props.class}
+                    {this.props.name} {this.props.regno}
+        const firstnameValue = this.refs.firstnameField.getValue();
+        const lastnameValue = this.refs.lastnameField.getValue();
+        const regnoValue = this.refs.regnoField.getValue();
+        const classValue = this.refs.classField.getValue();
+        const genderValue = this.state.value === 1 ? 'Male' : 'Female';
+
+        this.props.handleEditButton(requestValue);
         this.setState({ value: this.state.value===1? 2:1 });
-    };
+    }
+  
     
     handleDelete = () => {
         this.setState({ value: this.state.value===1? 2:1 });
@@ -38,7 +56,7 @@ export default class CardItem extends Component {
                 </div>
 
                 <CardActions>
-                    <FlatButton label="Edit" onClick={this.handleEdit}/>
+                    <FlatButton label="Edit" onClick={this.handleEditButton}/>
                     <FlatButton label="Delete" onClick={this.handleDelete}/>
                 </CardActions>
             </Card>
