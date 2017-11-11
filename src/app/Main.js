@@ -167,11 +167,11 @@ export default class Main extends Component {
             },
 
             edit_id: '',
-            editregno: '',
             editfirstname: '',
             editlastname: '',
-            editdob: '',
             editsex: '',
+            editdob: '',
+            editregno: '',
             editclass: '',
 
             regno: '',
@@ -199,19 +199,19 @@ export default class Main extends Component {
     }
 
 
-    handleEdit(edit_id, editregno, editfirstname,
-        editlastname, editdob, editsex, editclass) {
+    handleEdit(edit_id, editfirstname, editlastname,
+        editsex, editdob, editregno, editclass) {
         this.setState({
             editmodal: {
                 show: true,
             },
 
             edit_id: edit_id,
-            editregno: editregno,
             editfirstname: editfirstname,
             editlastname: editlastname,
-            editdob: editdob,
             editsex: editsex,
+            editdob: editdob,
+            editregno: editregno,
             editclass: editclass,
 
             function() {
@@ -265,8 +265,8 @@ export default class Main extends Component {
                                 <CardItem key={tile._id}
                                     _id={tile._id} regno={tile.regno}
                                     firstname={tile.firstname} lastname={tile.lastname}
-                                     dob={tile.dob} sex={tile.sex} class={tile.class}
-                                    handleditButton={this.handleEdit} />
+                                    dob={tile.dob} sex={tile.sex} class={tile.class}
+                                    handleEditButton={this.handleEdit} />
                             ))}
 
                         </GridList>
@@ -276,7 +276,15 @@ export default class Main extends Component {
                     </div>
 
                     {this.state.addmodal.show ? <AddModal open={true} handleSubmitButton={this.handleSubmitAdd} /> : ''}
-                    {this.state.edditmodal.show ? <EditModal open={true} handleSubmitButton={this.handleSubmitEdit} /> : ''}
+                    {this.state.editmodal.show ? <EditModal open={true}
+                        _id={this.state.edit_id} 
+                        firstname={this.state.editfirstname}
+                        lastname={this.state.editlastname}
+                        sex={this.state.editsex}
+                        dob={this.state.editdob}
+                        regno={this.state.editregno}
+                        class={this.state.editclass}
+                        handleSubmitButton={this.handleSubmitEdit} /> : ''}
 
                 </div>
 

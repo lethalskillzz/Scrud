@@ -30,21 +30,28 @@ export default class EditModal extends Component {
 
         this.state = {
             open: this.props.open,
+            
             value: this.props.sex==='Male'? 1:2,
             _id: this.props._id,
-            regno: this.props.regno,
             firstname: this.props.firstname,
             lastname: this.props.lastname,
-            dob: this.props.dob,
             sex: this.props.sex,
+            dob: this.props.dob,
+            regno: this.props.regno,
             class: this.props.class
         };
     }
 
-    handleChange = () => {
-        this.setState({ value: this.state.value === 1 ? 2 : 1 });
-    };
+    setDate(event, date){
+        var dateUTC = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        var dobUTC = dateUTC.toISOString().slice(0, 10);
+        this.setState({ dob: dobUTC });
+    }
 
+    handleChange = () => {
+        this.setState({ value: this.state.value===1? 2:1 });
+    };
+    
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -54,19 +61,20 @@ export default class EditModal extends Component {
 
         const firstnameValue = this.refs.firstnameField.getValue();
         const lastnameValue = this.refs.lastnameField.getValue();
+        const sexValue = this.state.value===1? 'Male':'Female';
+        const dobValue = this.state.dob;
         const regnoValue = this.refs.regnoField.getValue();
         const classValue = this.refs.classField.getValue();
-        const genderValue = this.state.value === 1 ? 'Male' : 'Female';
-
-        const requestValue = 'firstnameValue=' + firstnameValue +
-            'lastnameValue=' + lastnameValue +
-            'firstnameValue=' + firstnameValue +
-            'regnoValue=' + regnoValue +
-            'classValue=' + classValue +
-            'genderValue=' + genderValue;
-
+        
+        const requestValue = 'firstnameValue='+firstnameValue+
+        'lastnameValue='+lastnameValue+
+        'sexValue='+sexValue+
+        'dobValue='+dobValue+
+        'regnoValue='+regnoValue+
+        'classValue='+classValue
+         
         console.log(requestValue);
-
+        
         this.props.handleSubmitButton(requestValue);
         this.setState({ open: false });
     }
@@ -123,7 +131,8 @@ export default class EditModal extends Component {
 
                     <DatePicker textFieldStyle={styles.customWidth} 
                     hintText="Date Of Birth" 
-                    defaultDate={new Date(this.state.dob)}/>
+                    defaultDate={new Date(this.state.dob)}
+                    onChange={(event, date) => this.setDate(event,date)}/>
 
                     <TextField style={styles.customWidth}
                         floatingLabelText="Registration Number"

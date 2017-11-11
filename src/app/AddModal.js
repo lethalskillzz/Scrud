@@ -31,7 +31,15 @@ export default class NewModal extends Component {
         this.state = {
             open: this.props.open,
             value: 1,
+            dob: '',
         };
+    }
+    
+    
+    setDate(event, date){
+        var dateUTC = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        var dobUTC = dateUTC.toISOString().slice(0, 10);
+        this.setState({ dob: dobUTC });
     }
 
     handleChange = () => {
@@ -47,17 +55,18 @@ export default class NewModal extends Component {
 
         const firstnameValue = this.refs.firstnameField.getValue();
         const lastnameValue = this.refs.lastnameField.getValue();
+        const sexValue = this.state.value===1? 'Male':'Female';
+        const dobValue = this.state.dob;
         const regnoValue = this.refs.regnoField.getValue();
         const classValue = this.refs.classField.getValue();
-        const genderValue = this.state.value===1? 'Male':'Female';
         
         const requestValue = 'firstnameValue='+firstnameValue+
         'lastnameValue='+lastnameValue+
-        'firstnameValue='+firstnameValue+
+        'sexValue='+sexValue+
+        'dobValue='+dobValue+
         'regnoValue='+regnoValue+
-        'classValue='+classValue+
-        'genderValue='+genderValue;
-        
+        'classValue='+classValue
+         
         console.log(requestValue);
         
         this.props.handleSubmitButton(requestValue);
@@ -112,7 +121,9 @@ export default class NewModal extends Component {
                        
                     </SelectField>
                     
-                    <DatePicker textFieldStyle={styles.customWidth} hintText="Date Of Birth"/>
+                    <DatePicker textFieldStyle={styles.customWidth} 
+                    hintText="Date Of Birth"
+                    onChange={(event, date) => this.setDate(event,date)}/>
 
                     <TextField style={styles.customWidth}
                         floatingLabelText="Registration Number"

@@ -20,25 +20,32 @@ export default class CardItem extends Component {
         
         this.state = {
 
+            _id: this.props._id,
+            regno: this.props.regno,
+            firstname: this.props.firstname,
+            lastname: this.props.lastname,
+            dob: this.props.dob,
+            sex: this.props.sex,
+            class: this.props.class
+            
         };
     }
     
     handleEditButton(event) {
         event.preventDefault();
 
-        {this.props.sex} 
-                    {this.props.dob} 
-                    {this.props.class}
-                    {this.props.name} {this.props.regno}
-        const firstnameValue = this.refs.firstnameField.getValue();
-        const lastnameValue = this.refs.lastnameField.getValue();
-        const regnoValue = this.refs.regnoField.getValue();
-        const classValue = this.refs.classField.getValue();
-        const genderValue = this.state.value === 1 ? 'Male' : 'Female';
+        const _idValue = this.state._id;
+        const firstnameValue = this.state.firstname;
+        const lastnameValue = this.state.lastname;
+        const sexValue = this.state.sex;
+        const dobValue = this.state.dob;
+        const regnoValue = this.state.regno;;
+        const classValue = this.state.class;
+        
 
-        this.props.handleEditButton(requestValue);
-        this.setState({ value: this.state.value===1? 2:1 });
-    }
+        this.props.handleEditButton(_idValue, firstnameValue, lastnameValue, 
+            sexValue, dobValue, regnoValue, classValue);
+     }
   
     
     handleDelete = () => {
@@ -48,11 +55,12 @@ export default class CardItem extends Component {
     render() {
         return (
             <Card>
-                <CardTitle title={this.props.name} subtitle={this.props.regno} />
+                <CardTitle title={this.state.firstname + " " +
+                 this.state.lastname} subtitle={this.state.regno} />
                 <div style={style}>
-                    <p>{this.props.sex} <br/>
-                    {this.props.dob} <br/>
-                    {this.props.class}</p>
+                    <p>{this.state.sex} <br/>
+                    {this.state.dob} <br/>
+                    {this.state.class}</p>
                 </div>
 
                 <CardActions>
