@@ -17,6 +17,7 @@ export default class CardItem extends Component {
         super(props, context);
         
         this.handleEditButton = this.handleEditButton.bind(this);
+        this.handleDeleteButton = this.handleDeleteButton.bind(this);
         
         this.state = {
 
@@ -42,14 +43,24 @@ export default class CardItem extends Component {
         const regnoValue = this.state.regno;;
         const classValue = this.state.class;
         
-
         this.props.handleEditButton(_idValue, firstnameValue, lastnameValue, 
             sexValue, dobValue, regnoValue, classValue);
      }
   
     
-    handleDelete = () => {
-        this.setState({ value: this.state.value===1? 2:1 });
+    handleDeleteButton(event) {
+        event.preventDefault();
+
+        const _idValue = this.state._id;
+        const firstnameValue = this.state.firstname;
+        const lastnameValue = this.state.lastname;
+        const sexValue = this.state.sex;
+        const dobValue = this.state.dob;
+        const regnoValue = this.state.regno;;
+        const classValue = this.state.class;
+        
+        this.props.handleDeleteButton(_idValue, firstnameValue, lastnameValue, 
+            sexValue, dobValue, regnoValue, classValue);
     };
 
     render() {
@@ -65,7 +76,7 @@ export default class CardItem extends Component {
 
                 <CardActions>
                     <FlatButton label="Edit" onClick={this.handleEditButton}/>
-                    <FlatButton label="Delete" onClick={this.handleDelete}/>
+                    <FlatButton label="Delete" onClick={this.handleDeleteButton}/>
                 </CardActions>
             </Card>
         );

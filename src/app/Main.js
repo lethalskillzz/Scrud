@@ -145,6 +145,7 @@ export default class Main extends Component {
         this.handleSubmitDelete = this.handleSubmitDelete.bind(this);
 
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
 
         this.state = {
             addmodal: {
@@ -198,6 +199,28 @@ export default class Main extends Component {
         });
     }
 
+    
+    handleSubmitDelete(deleteValue) {
+        this.setState({
+            deletemodal: {
+                show: false,
+            }, function() {
+            }
+        });
+    }
+    
+    
+    
+    handleAdd = () => {
+
+        this.setState({
+            addmodal: {
+                show: true,
+            },
+        }, function () {
+
+        });
+    }
 
     handleEdit(edit_id, editfirstname, editlastname,
         editsex, editdob, editregno, editclass) {
@@ -218,27 +241,28 @@ export default class Main extends Component {
             }
         });
     }
-
-
-    handleSubmitDelete(deleteValue) {
+    
+    
+    handleDelete(edit_id, editfirstname, editlastname,
+        editsex, editdob, editregno, editclass) {
         this.setState({
             deletemodal: {
-                show: false,
-            }, function() {
+                show: true,
+            },
+
+            edit_id: edit_id,
+            editfirstname: editfirstname,
+            editlastname: editlastname,
+            editsex: editsex,
+            editdob: editdob,
+            editregno: editregno,
+            editclass: editclass,
+
+            function() {
             }
         });
     }
 
-    handleAddClick = () => {
-
-        this.setState({
-            addmodal: {
-                show: true,
-            },
-        }, function () {
-
-        });
-    }
 
 
     render() {
@@ -253,7 +277,6 @@ export default class Main extends Component {
                         ClassNameRight="miconuidocs-icon-navigation-expand-more"
                     />
 
-
                     <div className='col-md-12' style={styles.container} >
 
                         <GridList
@@ -266,11 +289,12 @@ export default class Main extends Component {
                                     _id={tile._id} regno={tile.regno}
                                     firstname={tile.firstname} lastname={tile.lastname}
                                     dob={tile.dob} sex={tile.sex} class={tile.class}
-                                    handleEditButton={this.handleEdit} />
+                                    handleEditButton={this.handleEdit}
+                                    handleDeleteButton={this.handleDelete} />
                             ))}
 
                         </GridList>
-                        <FloatingActionButton onClick={this.handleAddClick}>
+                        <FloatingActionButton onClick={this.handleAdd}>
                             <ContentAdd />
                         </FloatingActionButton>
                     </div>
@@ -285,6 +309,13 @@ export default class Main extends Component {
                         regno={this.state.editregno}
                         class={this.state.editclass}
                         handleSubmitButton={this.handleSubmitEdit} /> : ''}
+                        
+                        {this.state.deletemodal.show ? <DeleteModal open={true}
+                        _id={this.state.edit_id} 
+                        firstname={this.state.editfirstname}
+                        lastname={this.state.editlastname}
+                        regno={this.state.editregno}
+                        handleDeleteButton={this.handleSubmitDelete} /> : ''}
 
                 </div>
 
