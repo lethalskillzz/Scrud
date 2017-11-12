@@ -75,7 +75,7 @@ export default class EditModal extends Component {
          
         console.log(requestValue);
         
-        this.props.handleSubmitButton(requestValue);
+        this.props.handleSubmitButton(regnoValue, requestValue);
         this.setState({ open: false });
     }
 

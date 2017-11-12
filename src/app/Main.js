@@ -45,7 +45,6 @@ const muiTheme = getMuiTheme({
 
 
 
-
 export default class Main extends Component {
 
     constructor(props, context) {
@@ -106,9 +105,47 @@ export default class Main extends Component {
     componentDidMount() {
         this.loadStudent();
     }
+    
+    
+    addStudent(requestValue) {
+        
+        this.toggleRefreshIndicator(true);
+        axios.post('http://localhost:3000/students?'+requestValue).then((response) => {
+            this.toggleRefreshIndicator(false);
+            console.log("response", response);
+
+            if (response.data != null) {
+
+                this.setState({
+                    response: response.data,
+                    snackopen: true,
+                    message: response.data.firstname+ ' ' + 
+                    response.data.lastname+' added sucessfully',
+                }, function () {
+                });
+                
+                this.loadStudent();
+
+            } else {
+                this.setState({
+                    snackopen: true,
+                    message: 'Unable to add Student Resource',
+                }, function () {
+                });
+            }
+        }).catch((error) => {
+            this.toggleRefreshIndicator(false);
+            console.log(error);
+            this.setState({
+                snackopen: true,
+                message: 'Unable to add Student Resource',
+            }, function () {
+            });
+        });
+    }
 
     loadStudent() {
-
+        
         this.toggleRefreshIndicator(true);
         axios.get('http://localhost:3000/students').then((response) => {
             this.toggleRefreshIndicator(false);
@@ -119,22 +156,101 @@ export default class Main extends Component {
                 this.setState({
                     students: response.data,
                     snackopen: true,
-                    message: 'Students Resource loaded sucessfully',
+                    message: 'Student Resource loaded sucessfully',
                 }, function () {
                 });
 
             } else {
-
+                this.setState({
+                    snackopen: true,
+                    message: 'Unable to load Student Resource',
+                }, function () {
+                });
             }
         }).catch((error) => {
             this.toggleRefreshIndicator(false);
             console.log(error);
-            // if (error.response.status === 500) {
-
-            // }
+            this.setState({
+                snackopen: true,
+                message: 'Unable to load Student Resource',
+            }, function () {
+            });
         });
     }
 
+    
+    editStudent(editRegNo, editValue) {
+        
+        this.toggleRefreshIndicator(true);
+        axios.put('http://localhost:3000/students/'+editRegNo, {editValue}).then((response) => {
+            this.toggleRefreshIndicator(false);
+            console.log("response", response);
+
+            if (response.data != null) {
+
+                this.setState({
+                    response: response.data,
+                    snackopen: true,
+                    message: response.data.firstname+ ' ' + 
+                    response.data.lastname+' edited sucessfully',
+                }, function () {
+                });
+                
+                this.loadStudent();
+
+            } else {
+                this.setState({
+                    snackopen: true,
+                    message: 'Unable to edit Student Resource',
+                }, function () {
+                });
+            }
+        }).catch((error) => {
+            this.toggleRefreshIndicator(false);
+            console.log(error);
+            this.setState({
+                snackopen: true,
+                message: 'Unable to edit Student Resource',
+            }, function () {
+            });
+        });
+    }
+    
+    
+    deleteStudent(deleteValue) {
+         
+        this.toggleRefreshIndicator(true);
+        axios.delete('http://localhost:3000/students/'+deleteValue).then((response) => {
+            this.toggleRefreshIndicator(false);
+            console.log("response", response);
+
+            if (response.data != null) {
+
+                this.setState({
+                     snackopen: true,
+                    message: 'Student Resource deleted sucessfully',
+                }, function () {
+                });
+                
+                this.loadStudent();
+
+            } else {
+                this.setState({
+                    snackopen: true,
+                    message: 'Unable to delete Student Resource',
+                }, function () {
+                });
+            }
+        }).catch((error) => {
+            this.toggleRefreshIndicator(false);
+            console.log(error);
+            this.setState({
+                snackopen: true,
+                message: 'Unable to delete Student Resource',
+            }, function () {
+            });
+        });
+    }
 
     toggleRefreshIndicator(state) {
         this.setState({
@@ -145,23 +261,27 @@ export default class Main extends Component {
         });
     }
 
-    handleSubmitAdd(submitValue) {
+    handleSubmitAdd(requestValue) {
         this.setState({
             addmodal: {
                 show: false,
             }, function() {
             }
         });
+        
+        this.addStudent(requestValue);
 
     }
 
-    handleSubmitEdit(editValue) {
+    handleSubmitEdit(editRegNo, editValue) {
         this.setState({
             editmodal: {
                 show: false,
             }, function() {
             }
         });
+        
+        this.editStudent(editRegNo, editValue);
     }
 
 
@@ -172,6 +292,9 @@ export default class Main extends Component {
             }, function() {
             }
         });
+        
+        this.deleteStudent(deleteValue);
+        
     }
 
 
@@ -291,7 +414,7 @@ export default class Main extends Component {
                     <Snackbar
                         open={this.state.snackopen}
                         message={this.state.message}
-                         autoHideDuration={this.state.autoHideDuration}
+                        autoHideDuration={this.state.autoHideDuration}
                         onRequestClose={this.handleRequestClose}
                     />
                 </div>

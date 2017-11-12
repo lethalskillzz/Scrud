@@ -57,9 +57,9 @@ export default class DeleteModal extends Component {
         'lastnameValue='+lastnameValue+
         'regnoValue='+regnoValue;
          
-        console.log(deleteValue);
+        //console.log(deleteValue);
         
-        this.props.handleDeleteButton(deleteValue);
+        this.props.handleDeleteButton(regnoValue);
         this.setState({ open: false });
     }
 
