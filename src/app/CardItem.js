@@ -32,6 +32,7 @@ export default class CardItem extends Component {
         };
     }
     
+    
     handleEditButton(event) {
         event.preventDefault();
 

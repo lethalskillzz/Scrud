@@ -111,7 +111,7 @@ export default class Main extends Component {
     addStudent(requestValue) {
         
         this.toggleRefreshIndicator(true);
-        axios.post('http://localhost:3000/students?'+requestValue).then((response) => {
+        axios.post('https://scrud-server.herokuapp.com/students?'+requestValue).then((response) => {
             this.toggleRefreshIndicator(false);
             console.log("response", response);
 
@@ -148,12 +148,12 @@ export default class Main extends Component {
     loadStudent() {
         
         this.toggleRefreshIndicator(true);
-        axios.get('http://localhost:3000/students').then((response) => {
+        axios.get('https://scrud-server.herokuapp.com/students').then((response) => {
             this.toggleRefreshIndicator(false);
             console.log("response", response);
 
             if (response.data != null) {
-
+                
                 this.setState({
                     students: response.data,
                     snackopen: true,
@@ -183,7 +183,7 @@ export default class Main extends Component {
     editStudent(editRegNo, editValue) {
         
         this.toggleRefreshIndicator(true);
-        axios.put('http://localhost:3000/students/'+editRegNo, editValue).then((response) => {
+        axios.put('https://scrud-server.herokuapp.com/students/'+editRegNo, editValue).then((response) => {
             this.toggleRefreshIndicator(false);
             console.log("response", response);
 
@@ -221,7 +221,7 @@ export default class Main extends Component {
     deleteStudent(deleteValue) {
          
         this.toggleRefreshIndicator(true);
-        axios.delete('http://localhost:3000/students/'+deleteValue).then((response) => {
+        axios.delete('https://scrud-server.herokuapp.com/students/'+deleteValue).then((response) => {
             this.toggleRefreshIndicator(false);
             console.log("response", response);
 
