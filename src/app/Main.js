@@ -107,6 +107,7 @@ export default class Main extends Component {
     }
     
     
+    
     addStudent(requestValue) {
         
         this.toggleRefreshIndicator(true);
@@ -182,7 +183,7 @@ export default class Main extends Component {
     editStudent(editRegNo, editValue) {
         
         this.toggleRefreshIndicator(true);
-        axios.put('http://localhost:3000/students/'+editRegNo, {editValue}).then((response) => {
+        axios.put('http://localhost:3000/students/'+editRegNo, editValue).then((response) => {
             this.toggleRefreshIndicator(false);
             console.log("response", response);
 

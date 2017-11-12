@@ -66,12 +66,21 @@ export default class EditModal extends Component {
         const regnoValue = this.refs.regnoField.getValue();
         const classValue = this.refs.classField.getValue();
         
-        const requestValue = 'firstnameValue='+firstnameValue+
-        'lastnameValue='+lastnameValue+
-        'sexValue='+sexValue+
-        'dobValue='+dobValue+
-        'regnoValue='+regnoValue+
-        'classValue='+classValue
+        // const requestValue = 
+        // '{ \n \"firstname\": \"'+firstnameValue+'\" \n'+
+        // '\"lastname\": \"'+lastnameValue+'\" \n'+
+        // '\"sex\": \"'+sexValue+'\" \n'+
+        // '\"dob\": \"'+dobValue+'\" \n'+
+        // '\"regno\": \"'+regnoValue+'\" \n'+
+        // '\"class\": \"'+classValue+'\" \n }'
+        
+        const requestValue = 
+        {'firstname': firstnameValue,
+        'lastname': lastnameValue,
+        'sex': sexValue,
+        'dob': dobValue,
+        'regno': regnoValue,
+        'class': classValue };
          
         console.log(requestValue);
         
