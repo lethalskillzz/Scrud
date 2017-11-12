@@ -8,8 +8,10 @@ import { GridList } from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import axios from 'axios';
 
 import CardItem from './CardItem';
+import Refresh from './Refresh';
 import AddModal from './AddModal';
 import EditModal from './EditModal';
 import DeleteModal from './DeleteModal';
@@ -148,15 +150,23 @@ export default class Main extends Component {
         this.handleDelete = this.handleDelete.bind(this);
 
         this.state = {
+
+            refreshIndicator: {
+                show: false,
+            },
+
             addmodal: {
                 show: false,
             },
+
             editmodal: {
                 show: false,
             },
+
             deletemodal: {
                 show: false,
             },
+
             response: {
                 _id: '',
                 regno: '',
@@ -176,8 +186,45 @@ export default class Main extends Component {
             editclass: '',
 
             regno: '',
-            url: 'http://www.remitademo.net/remita/ecomm/',
+            url: 'http://localhost:3000/',
         };
+    }
+
+    componentDidMount() {
+        this.loadStudent();
+    }
+
+    loadStudent() {
+
+        this.toggleRefreshIndicator(true);
+
+        axios.get(this.state.url).then((response) => {
+            this.toggleRefreshIndicator(false);
+            console.log("response", response);
+
+            if (response.data == "") {
+
+            } else {
+
+            }
+        })
+            .catch((error) => {
+                this.toggleRefreshIndicator(false);
+                console.log(error);
+                // if (error.response.status === 500) {
+
+                // }
+            });
+    }
+
+
+    toggleRefreshIndicator(state) {
+        this.setState({
+            refreshIndicator: {
+                show: state,
+            },
+        }, function () {
+        });
     }
 
     handleSubmitAdd(submitValue) {
@@ -199,7 +246,7 @@ export default class Main extends Component {
         });
     }
 
-    
+
     handleSubmitDelete(deleteValue) {
         this.setState({
             deletemodal: {
@@ -208,9 +255,8 @@ export default class Main extends Component {
             }
         });
     }
-    
-    
-    
+
+
     handleAdd = () => {
 
         this.setState({
@@ -241,8 +287,8 @@ export default class Main extends Component {
             }
         });
     }
-    
-    
+
+
     handleDelete(edit_id, editfirstname, editlastname,
         editsex, editdob, editregno, editclass) {
         this.setState({
@@ -262,7 +308,6 @@ export default class Main extends Component {
             }
         });
     }
-
 
 
     render() {
@@ -301,7 +346,7 @@ export default class Main extends Component {
 
                     {this.state.addmodal.show ? <AddModal open={true} handleSubmitButton={this.handleSubmitAdd} /> : ''}
                     {this.state.editmodal.show ? <EditModal open={true}
-                        _id={this.state.edit_id} 
+                        _id={this.state.edit_id}
                         firstname={this.state.editfirstname}
                         lastname={this.state.editlastname}
                         sex={this.state.editsex}
@@ -309,13 +354,15 @@ export default class Main extends Component {
                         regno={this.state.editregno}
                         class={this.state.editclass}
                         handleSubmitButton={this.handleSubmitEdit} /> : ''}
-                        
-                        {this.state.deletemodal.show ? <DeleteModal open={true}
-                        _id={this.state.edit_id} 
+
+                    {this.state.deletemodal.show ? <DeleteModal open={true}
+                        _id={this.state.edit_id}
                         firstname={this.state.editfirstname}
                         lastname={this.state.editlastname}
                         regno={this.state.editregno}
                         handleDeleteButton={this.handleSubmitDelete} /> : ''}
+
+                    {this.state.refreshIndicator.show ? <Refresh /> : ''}
 
                 </div>
 
