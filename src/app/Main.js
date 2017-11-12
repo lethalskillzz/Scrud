@@ -8,6 +8,7 @@ import { GridList } from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
 
 import CardItem from './CardItem';
@@ -43,98 +44,6 @@ const muiTheme = getMuiTheme({
 });
 
 
-const tilesData = [
-    {
-        _id: '1',
-        regno: 'REG38576885',
-        firstname: 'Safiya',
-        lastname: 'Ibrahim',
-        dob: '12/4/1999',
-        sex: 'Female',
-        class: 'class#'
-    },
-    {
-        _id: '2',
-        regno: 'REG48576884',
-        firstname: 'Bola',
-        lastname: 'Aina',
-        dob: '12/4/1999',
-        sex: 'Female',
-        class: 'class#'
-    },
-    {
-        _id: '3',
-        regno: 'REG68576884',
-        firstname: 'Yusuf',
-        lastname: 'Saliu',
-        dob: '12/4/1999',
-        sex: 'Male',
-        class: 'class#'
-    },
-    {
-        _id: '4',
-        regno: 'REG18576882',
-        firstname: 'Keneth',
-        lastname: 'Idoh',
-        dob: '12/4/1999',
-        sex: 'Male',
-        class: 'class#'
-    },
-    {
-        _id: '5',
-        regno: 'REG28576889',
-        firstname: 'Julie',
-        lastname: 'Eze',
-        dob: '12/4/1999',
-        sex: 'Female',
-        class: 'class#'
-    },
-    {
-        _id: '6',
-        regno: 'REG88576885',
-        firstname: 'Olu',
-        lastname: 'Makinde',
-        dob: '12/4/1999',
-        sex: 'Male',
-        class: 'class#'
-    },
-    {
-        _id: '7',
-        regno: 'REG67576888',
-        firstname: 'Samuel',
-        lastname: 'Osita',
-        dob: '12/4/1999',
-        sex: 'Male',
-        class: 'class#'
-    },
-    {
-        _id: '8',
-        regno: 'REG10576880',
-        firstname: 'Jacob',
-        lastname: 'Zuma',
-        dob: '12/4/1999',
-        sex: 'Male',
-        class: 'class#'
-    },
-    {
-        _id: '9',
-        regno: 'REG25576885',
-        firstname: 'Audu',
-        lastname: 'Aliu',
-        dob: '12/4/1999',
-        sex: 'Male',
-        class: 'class#'
-    },
-    {
-        _id: '10',
-        regno: 'REG66576889',
-        firstname: 'Musa',
-        lastname: 'Bature',
-        dob: '12/4/1999',
-        sex: 'Male',
-        class: 'class#'
-    }
-];
 
 
 export default class Main extends Component {
@@ -167,6 +76,7 @@ export default class Main extends Component {
                 show: false,
             },
 
+            students: [],
             response: {
                 _id: '',
                 regno: '',
@@ -186,7 +96,10 @@ export default class Main extends Component {
             editclass: '',
 
             regno: '',
-            url: 'http://localhost:3000/',
+
+            autoHideDuration: 4000,
+            message: 'Event added to your calendar',
+            snackopen: false,
         };
     }
 
@@ -197,24 +110,29 @@ export default class Main extends Component {
     loadStudent() {
 
         this.toggleRefreshIndicator(true);
-
-        axios.get(this.state.url).then((response) => {
+        axios.get('http://localhost:3000/students').then((response) => {
             this.toggleRefreshIndicator(false);
             console.log("response", response);
 
-            if (response.data == "") {
+            if (response.data != null) {
+
+                this.setState({
+                    students: response.data,
+                    snackopen: true,
+                    message: 'Students Resource loaded sucessfully',
+                }, function () {
+                });
 
             } else {
 
             }
-        })
-            .catch((error) => {
-                this.toggleRefreshIndicator(false);
-                console.log(error);
-                // if (error.response.status === 500) {
+        }).catch((error) => {
+            this.toggleRefreshIndicator(false);
+            console.log(error);
+            // if (error.response.status === 500) {
 
-                // }
-            });
+            // }
+        });
     }
 
 
@@ -310,6 +228,12 @@ export default class Main extends Component {
     }
 
 
+    handleRequestClose = () => {
+        this.setState({
+            snackopen: false,
+        });
+    };
+
     render() {
 
         return (
@@ -328,12 +252,12 @@ export default class Main extends Component {
                             cellHeight={'auto'}
                             cols={4}
                             style={styles.gridList}>
-                            <Subheader>Student</Subheader>
-                            {tilesData.map((tile) => (
-                                <CardItem key={tile._id}
-                                    _id={tile._id} regno={tile.regno}
-                                    firstname={tile.firstname} lastname={tile.lastname}
-                                    dob={tile.dob} sex={tile.sex} class={tile.class}
+                            <Subheader>Student Resource</Subheader>
+                            {this.state.students.map((student) => (
+                                <CardItem key={student._id}
+                                    _id={student._id} regno={student.regno}
+                                    firstname={student.firstname} lastname={student.lastname}
+                                    dob={student.dob} sex={student.sex} class={student.class}
                                     handleEditButton={this.handleEdit}
                                     handleDeleteButton={this.handleDelete} />
                             ))}
@@ -364,6 +288,12 @@ export default class Main extends Component {
 
                     {this.state.refreshIndicator.show ? <Refresh /> : ''}
 
+                    <Snackbar
+                        open={this.state.snackopen}
+                        message={this.state.message}
+                         autoHideDuration={this.state.autoHideDuration}
+                        onRequestClose={this.handleRequestClose}
+                    />
                 </div>
 
             </MuiThemeProvider>
